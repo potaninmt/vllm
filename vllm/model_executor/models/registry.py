@@ -78,6 +78,7 @@ _TEXT_GENERATION_MODELS = {
     "PhiMoEForCausalLM": ("phimoe", "PhiMoEForCausalLM"),
     # QWenLMHeadModel supports multimodal
     "Qwen2ForCausalLM": ("qwen2", "Qwen2ForCausalLM"),
+    "Qwen2BiasForCausalLM": ("qwen2bias", "Qwen2BiasForCausalLM"),
     "Qwen2MoeForCausalLM": ("qwen2_moe", "Qwen2MoeForCausalLM"),
     "RWForCausalLM": ("falcon", "FalconForCausalLM"),
     "StableLMEpochForCausalLM": ("stablelm", "StablelmForCausalLM"),
@@ -164,6 +165,8 @@ _ROCM_SWA_REASON = ("Sliding window attention (SWA) is not yet supported in "
                     "`VLLM_USE_TRITON_FLASH_ATTN=0`")
 _ROCM_PARTIALLY_SUPPORTED_MODELS: Dict[str, str] = {
     "Qwen2ForCausalLM":
+    _ROCM_SWA_REASON,
+    "Qwen2BiasForCausalLM":
     _ROCM_SWA_REASON,
     "MistralForCausalLM":
     _ROCM_SWA_REASON,

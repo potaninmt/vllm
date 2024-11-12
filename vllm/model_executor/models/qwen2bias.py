@@ -90,7 +90,7 @@ class Qwen2BiasMLP(nn.Module):
         return x
 
 
-class Qwen2AttentionBias(nn.Module):
+class Qwen2BiasAttention(nn.Module):
 
     def __init__(self,
                  hidden_size: int,
@@ -171,7 +171,7 @@ class Qwen2AttentionBias(nn.Module):
         return output
 
 
-class Qwen2DecoderLayerBias(nn.Module):
+class Qwen2BiasDecoderLayer(nn.Module):
 
     def __init__(
         self,
@@ -185,7 +185,7 @@ class Qwen2DecoderLayerBias(nn.Module):
         # Requires transformers > 4.32.0
         rope_theta = getattr(config, "rope_theta", 1000000)
         rope_scaling = getattr(config, "rope_scaling", None)
-        self.self_attn = Qwen2AttentionBias(
+        self.self_attn = Qwen2BiasAttention(
             hidden_size=self.hidden_size,
             num_heads=config.num_attention_heads,
             max_position=config.max_position_embeddings,
@@ -264,7 +264,7 @@ class Qwen2BiasModel(nn.Module):
 
         self.start_layer, self.end_layer, self.layers = make_layers(
             config.num_hidden_layers,
-            lambda prefix: Qwen2DecoderLayerBias(config=config,
+            lambda prefix: Qwen2BiasDecoderLayer(config=config,
                                              cache_config=cache_config,
                                              quant_config=quant_config,
                                              prefix=f"{prefix}.layers"),
